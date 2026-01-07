@@ -24,7 +24,7 @@ from app.core.handlers import (
     request_validation_exception_handler,
 )
 from app.core.settings import get_settings
-from app.sample_module.apis import router as example_router
+from app.routes.audio import router as audio_router
 
 # Globals
 settings = get_settings()
@@ -57,9 +57,9 @@ app = FastAPI(
     default_response_class=ORJSONResponse,
     docs_url="/",
     contact={
-        "name": "GrandGale Technologies",
-        "url": "https://github.com/GrandGaleTechnologies",
-        "email": "contact@grandgale.tech",
+        "name": "Bello Shehu Ango",
+        "url": "https://github.com/BelloAngo/lecture-buddy",
+        "email": "angobello0@gmail.com",
     },
 )
 # Variables
@@ -90,7 +90,7 @@ app.add_exception_handler(CustomHTTPException, custom_http_exception_handler)  #
 # Logfire Config
 if settings.LOGFIRE_TOKEN:
     logfire.configure(
-        service_name="heavyweight-mongodb",
+        service_name="lecture-buddy",
         token=settings.LOGFIRE_TOKEN,
         environment="dev" if settings.DEBUG else "prod",
     )
@@ -109,4 +109,4 @@ async def health_check():
 
 
 # Routers
-app.include_router(example_router, prefix="/users", tags=["Example Docs"])
+app.include_router(audio_router, prefix="/audio", tags=["Audio APIs"])
