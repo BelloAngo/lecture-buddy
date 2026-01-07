@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
 
-fastapi run --port $PORT
+uv run fastapi run --port $PORT
